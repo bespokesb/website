@@ -31,6 +31,6 @@ This repository contains a modern, attention‑grabbing landing page for BeSpoke
 This is a static site and can be deployed on any static hosting provider (e.g., Netlify, Vercel, GitHub Pages, AWS S3). Upload the three files (`index.html`, `styles.css`, `script.js`) and configure your host to serve them from the site root.
 
 ## Contact
-- Address: F-05-06, 5th Floor, Block F, StarParc Point, Jln Taman Ibu Kota, 53300 Kuala Lumpur
+- Address: No 6A, Jalan 4/12B, Seksyen 4 Tambahan, Bandar Baru Bangi, 43650 Selangor
 - Phone: 017-2388058
-- Email: info@bespokesb.com
+- Email: hello@bespokesb.com
