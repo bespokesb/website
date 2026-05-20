@@ -15,20 +15,10 @@
             text-align: center;
             color: white;
         }
-        .news-hero h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-        .news-hero p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
+        .news-hero h1 { font-size: 3rem; font-weight: 700; margin-bottom: 1rem; }
+        .news-hero p  { font-size: 1.2rem; opacity: 0.9; }
 
-        .news-section {
-            padding: 4rem 0 6rem;
-            background: var(--bg-light);
-        }
+        .news-section { padding: 4rem 0 6rem; background: var(--bg-light); }
 
         .news-grid {
             display: grid;
@@ -47,139 +37,54 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
         }
-        .news-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-        }
+        .news-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
 
-        .news-card-body {
-            padding: 1.75rem;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
+        .news-card-body { padding: 1.75rem; flex: 1; display: flex; flex-direction: column; }
 
         .news-meta {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 0.75rem;
-            font-size: 0.8rem;
-            color: var(--text-light);
+            display: flex; align-items: center; gap: 1rem;
+            margin-bottom: 0.75rem; font-size: 0.8rem; color: var(--text-light);
         }
         .news-category {
-            background: #ede9fe;
-            color: #7c3aed;
-            padding: 0.2rem 0.65rem;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.75rem;
+            background: #ede9fe; color: #7c3aed;
+            padding: 0.2rem 0.65rem; border-radius: 50px;
+            font-weight: 600; font-size: 0.75rem;
         }
-
-        .news-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 0.75rem;
-            line-height: 1.4;
-        }
-
-        .news-excerpt {
-            color: var(--text-light);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            flex: 1;
-        }
-
+        .news-title  { font-size: 1.2rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.75rem; line-height: 1.4; }
+        .news-excerpt { color: var(--text-light); font-size: 0.95rem; line-height: 1.6; flex: 1; }
         .news-read-more {
-            margin-top: 1.25rem;
-            color: var(--primary-color);
-            font-weight: 600;
-            font-size: 0.9rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
+            margin-top: 1.25rem; color: var(--primary-color);
+            font-weight: 600; font-size: 0.9rem;
+            display: inline-flex; align-items: center; gap: 0.4rem;
         }
 
         /* Modal */
         .post-modal-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.6);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,0.6); z-index: 2000;
+            align-items: center; justify-content: center; padding: 1rem;
         }
-        .post-modal-overlay.active {
-            display: flex;
-        }
+        .post-modal-overlay.active { display: flex; }
         .post-modal {
-            background: white;
-            border-radius: 16px;
-            max-width: 760px;
-            width: 100%;
-            max-height: 85vh;
-            overflow-y: auto;
-            padding: 2.5rem;
-            position: relative;
+            background: white; border-radius: 16px;
+            max-width: 760px; width: 100%; max-height: 85vh;
+            overflow-y: auto; padding: 2.5rem; position: relative;
         }
         .post-modal-close {
-            position: absolute;
-            top: 1.25rem;
-            right: 1.25rem;
-            background: var(--bg-light);
-            border: none;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            font-size: 1rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            position: absolute; top: 1.25rem; right: 1.25rem;
+            background: var(--bg-light); border: none;
+            width: 36px; height: 36px; border-radius: 50%;
+            font-size: 1rem; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
             color: var(--text-light);
         }
         .post-modal-close:hover { background: var(--border-color); }
-        .post-modal-meta {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-        .post-modal-title {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-            line-height: 1.3;
-        }
-        .post-modal-content {
-            color: var(--text-dark);
-            line-height: 1.8;
-            font-size: 1rem;
-            white-space: pre-wrap;
-        }
+        .post-modal-meta { display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; }
+        .post-modal-title { font-size: 1.75rem; font-weight: 700; color: var(--text-dark); margin-bottom: 1rem; line-height: 1.3; }
+        .post-modal-content { color: var(--text-dark); line-height: 1.8; font-size: 1rem; white-space: pre-wrap; }
 
-        /* Empty / loading states */
-        .news-empty {
-            text-align: center;
-            padding: 4rem 0;
-            color: var(--text-light);
-        }
-        .news-empty i {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            display: block;
-            opacity: 0.4;
-        }
-        .news-loading {
-            text-align: center;
-            padding: 4rem 0;
-            color: var(--text-light);
-        }
+        .news-empty, .news-loading { text-align: center; padding: 4rem 0; color: var(--text-light); }
+        .news-empty i, .news-loading i { font-size: 3rem; margin-bottom: 1rem; display: block; opacity: 0.4; }
 
         @media (max-width: 768px) {
             .news-hero h1 { font-size: 2rem; }
@@ -199,12 +104,16 @@
                 </a>
             </div>
             <ul class="nav-menu">
-                <li><a href="index.html#home" class="nav-link">Home</a></li>
-                <li><a href="index.html#services" class="nav-link">Services</a></li>
-                <li><a href="index.html#about" class="nav-link">About</a></li>
-                <li><a href="news.html" class="nav-link" style="color: var(--primary-color); font-weight:600;">News</a></li>
-                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                <li><a href="index.html#home"     class="nav-link" data-en="Home"     data-bm="Laman Utama">Home</a></li>
+                <li><a href="index.html#services"  class="nav-link" data-en="Services" data-bm="Perkhidmatan">Services</a></li>
+                <li><a href="index.html#about"     class="nav-link" data-en="About"    data-bm="Tentang">About</a></li>
+                <li><a href="news.html"            class="nav-link" data-en="News"     data-bm="Berita" style="color:var(--primary-color);font-weight:600;">News</a></li>
+                <li><a href="index.html#contact"   class="nav-link" data-en="Contact"  data-bm="Hubungi">Contact</a></li>
             </ul>
+            <div class="language-toggle">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="bm">BM</button>
+            </div>
             <div class="hamburger">
                 <span></span>
                 <span></span>
@@ -216,8 +125,11 @@
     <!-- Hero -->
     <section class="news-hero">
         <div class="container">
-            <h1>News &amp; Updates</h1>
-            <p>Latest insights, projects and announcements from BeSpoke Integrated</p>
+            <h1 data-en="News &amp; Updates" data-bm="Berita &amp; Kemas Kini">News &amp; Updates</h1>
+            <p data-en="Latest insights, projects and announcements from BeSpoke Integrated"
+               data-bm="Wawasan terkini, projek dan pengumuman dari BeSpoke Integrated">
+                Latest insights, projects and announcements from BeSpoke Integrated
+            </p>
         </div>
     </section>
 
@@ -225,8 +137,8 @@
     <section class="news-section">
         <div class="container">
             <div id="newsGrid" class="news-loading">
-                <i class="fas fa-circle-notch fa-spin" style="font-size:2rem; margin-bottom:1rem; display:block; color: var(--primary-color);"></i>
-                Loading posts…
+                <i class="fas fa-circle-notch fa-spin" style="font-size:2rem;margin-bottom:1rem;display:block;color:var(--primary-color);opacity:1;"></i>
+                <span data-en="Loading posts…" data-bm="Memuatkan catatan…">Loading posts…</span>
             </div>
         </div>
     </section>
@@ -237,20 +149,24 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3 class="footer-title">BeSpoke Integrated Sdn Bhd</h3>
-                    <p class="footer-description">Your trusted IT solutions partner in Kuala Lumpur</p>
+                    <p class="footer-description"
+                       data-en="Your trusted IT solutions partner in Kuala Lumpur"
+                       data-bm="Rakan penyelesaian IT dipercayai anda di Kuala Lumpur">
+                        Your trusted IT solutions partner in Kuala Lumpur
+                    </p>
                 </div>
                 <div class="footer-section">
-                    <h4 class="footer-subtitle">Quick Links</h4>
+                    <h4 class="footer-subtitle" data-en="Quick Links" data-bm="Pautan Pantas">Quick Links</h4>
                     <ul class="footer-links">
-                        <li><a href="index.html#home">Home</a></li>
-                        <li><a href="index.html#services">Services</a></li>
-                        <li><a href="index.html#about">About</a></li>
-                        <li><a href="news.html">News</a></li>
-                        <li><a href="index.html#contact">Contact</a></li>
+                        <li><a href="index.html#home"     data-en="Home"     data-bm="Laman Utama">Home</a></li>
+                        <li><a href="index.html#services"  data-en="Services" data-bm="Perkhidmatan">Services</a></li>
+                        <li><a href="index.html#about"    data-en="About"    data-bm="Tentang">About</a></li>
+                        <li><a href="news.html"           data-en="News"     data-bm="Berita">News</a></li>
+                        <li><a href="index.html#contact"  data-en="Contact"  data-bm="Hubungi">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4 class="footer-subtitle">Contact Info</h4>
+                    <h4 class="footer-subtitle" data-en="Contact Info" data-bm="Maklumat Hubungan">Contact Info</h4>
                     <div class="footer-contact">
                         <p><i class="fas fa-map-marker-alt"></i> No 6A, Jalan 4/12B, Seksyen 4 Tambahan, Bandar Baru Bangi, 43650 Selangor</p>
                         <p><i class="fas fa-phone"></i> 017-2388058</p>
@@ -259,7 +175,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 - <script>document.write(new Date().getFullYear());</script> BeSpoke Integrated Sdn Bhd. All rights reserved.</p>
+                <p>&copy; 2024 - <script>document.write(new Date().getFullYear());</script> BeSpoke Integrated Sdn Bhd. <span data-en="All rights reserved." data-bm="Hak cipta terpelihara.">All rights reserved.</span></p>
             </div>
         </div>
     </footer>
@@ -276,20 +192,34 @@
 
     <script src="script.js"></script>
     <script>
-        const grid = document.getElementById('newsGrid');
-        const modal = document.getElementById('postModal');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalMeta = document.getElementById('modalMeta');
+        const grid         = document.getElementById('newsGrid');
+        const modal        = document.getElementById('postModal');
+        const modalTitle   = document.getElementById('modalTitle');
+        const modalMeta    = document.getElementById('modalMeta');
         const modalContent = document.getElementById('modalContent');
 
-        document.getElementById('modalClose').addEventListener('click', closeModal);
-        modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+        // UI string translations
+        const t = {
+            en: {
+                readMore:  'Read more',
+                empty:     'No posts published yet. Check back soon!',
+                fileProto: 'Open this page from the live site to view posts.',
+            },
+            bm: {
+                readMore:  'Baca lagi',
+                empty:     'Tiada catatan lagi. Semak semula tidak lama lagi!',
+                fileProto: 'Buka laman ini dari laman langsung untuk melihat catatan.',
+            }
+        };
 
-        function closeModal() { modal.classList.remove('active'); }
+        function lang() { return window.__currentLang || localStorage.getItem('bespoke-lang') || 'en'; }
+        function tr(key) { return (t[lang()] || t.en)[key]; }
 
         function formatDate(iso) {
-            return new Date(iso).toLocaleDateString('en-MY', { year: 'numeric', month: 'long', day: 'numeric' });
+            return new Date(iso).toLocaleDateString(
+                lang() === 'bm' ? 'ms-MY' : 'en-MY',
+                { year: 'numeric', month: 'long', day: 'numeric' }
+            );
         }
 
         function excerpt(text, max = 160) {
@@ -302,22 +232,28 @@
                 <span class="news-category">${post.category || 'News'}</span>
                 <span style="color:var(--text-light);font-size:.85rem;">${formatDate(post.date)}</span>
             `;
-            modalTitle.textContent = post.title;
+            modalTitle.textContent   = post.title;
             modalContent.textContent = post.content;
             modal.classList.add('active');
         }
+
+        document.getElementById('modalClose').addEventListener('click', () => modal.classList.remove('active'));
+        modal.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('active'); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') modal.classList.remove('active'); });
+
+        let cachedPosts = [];
 
         function renderPosts(posts) {
             const published = posts.filter(p => p.status !== 'draft');
             if (published.length === 0) {
                 grid.className = 'news-empty';
-                grid.innerHTML = '<i class="fas fa-newspaper"></i><p>No posts published yet. Check back soon!</p>';
+                grid.innerHTML = `<i class="fas fa-newspaper"></i><p>${tr('empty')}</p>`;
                 return;
             }
             const sorted = [...published].sort((a, b) => new Date(b.date) - new Date(a.date));
             grid.className = 'news-grid';
             grid.innerHTML = sorted.map(post => `
-                <article class="news-card" onclick='openPost(${JSON.stringify(post)})'>
+                <article class="news-card" onclick='openPost(${JSON.stringify(post).replace(/'/g, "&#39;")})'>
                     <div class="news-card-body">
                         <div class="news-meta">
                             <span class="news-category">${post.category || 'News'}</span>
@@ -325,7 +261,7 @@
                         </div>
                         <h2 class="news-title">${post.title}</h2>
                         <p class="news-excerpt">${excerpt(post.content)}</p>
-                        <span class="news-read-more">Read more <i class="fas fa-arrow-right"></i></span>
+                        <span class="news-read-more">${tr('readMore')} <i class="fas fa-arrow-right"></i></span>
                     </div>
                 </article>
             `).join('');
@@ -334,19 +270,25 @@
         async function loadPosts() {
             if (location.protocol === 'file:') {
                 grid.className = 'news-empty';
-                grid.innerHTML = '<i class="fas fa-newspaper"></i><p>Open this page from the live GitHub Pages site to view posts.<br><small style="opacity:.6;">Fetch does not work on file:// — push to GitHub first.</small></p>';
+                grid.innerHTML = `<i class="fas fa-newspaper"></i><p>${tr('fileProto')}</p>`;
                 return;
             }
             try {
-                const res = await fetch('data/posts.json');
-                if (!res.ok) throw new Error('not found');
+                const res  = await fetch('data/posts.json');
+                if (!res.ok) throw new Error();
                 const data = await res.json();
-                renderPosts(data.posts || []);
+                cachedPosts = data.posts || [];
+                renderPosts(cachedPosts);
             } catch {
                 grid.className = 'news-empty';
-                grid.innerHTML = '<i class="fas fa-newspaper"></i><p>No posts published yet. Check back soon!</p>';
+                grid.innerHTML = `<i class="fas fa-newspaper"></i><p>${tr('empty')}</p>`;
             }
         }
+
+        // Re-render when language switches so dates & labels update
+        document.addEventListener('langchange', () => {
+            if (cachedPosts.length) renderPosts(cachedPosts);
+        });
 
         loadPosts();
     </script>
