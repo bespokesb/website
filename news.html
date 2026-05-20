@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News & Updates - BeSpoke Integrated Sdn Bhd</title>
+    <meta name="description" content="Latest news, updates and insights from BeSpoke Integrated Sdn Bhd">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .news-hero {
+            padding: 8rem 0 4rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            text-align: center;
+            color: white;
+        }
+        .news-hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .news-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .news-section {
+            padding: 4rem 0 6rem;
+            background: var(--bg-light);
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+
+        .news-card {
+            background: var(--bg-white);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        .news-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .news-card-body {
+            padding: 1.75rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+        .news-category {
+            background: #ede9fe;
+            color: #7c3aed;
+            padding: 0.2rem 0.65rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.75rem;
+        }
+
+        .news-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .news-excerpt {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .news-read-more {
+            margin-top: 1.25rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        /* Modal */
+        .post-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        .post-modal-overlay.active {
+            display: flex;
+        }
+        .post-modal {
+            background: white;
+            border-radius: 16px;
+            max-width: 760px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 2.5rem;
+            position: relative;
+        }
+        .post-modal-close {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.25rem;
+            background: var(--bg-light);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+        }
+        .post-modal-close:hover { background: var(--border-color); }
+        .post-modal-meta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        .post-modal-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+        .post-modal-content {
+            color: var(--text-dark);
+            line-height: 1.8;
+            font-size: 1rem;
+            white-space: pre-wrap;
+        }
+
+        /* Empty / loading states */
+        .news-empty {
+            text-align: center;
+            padding: 4rem 0;
+            color: var(--text-light);
+        }
+        .news-empty i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+            opacity: 0.4;
+        }
+        .news-loading {
+            text-align: center;
+            padding: 4rem 0;
+            color: var(--text-light);
+        }
+
+        @media (max-width: 768px) {
+            .news-hero h1 { font-size: 2rem; }
+            .news-grid { grid-template-columns: 1fr; }
+            .post-modal { padding: 1.5rem; }
+            .post-modal-title { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <div class="nav-brand">
+                <a href="index.html" style="text-decoration:none;">
+                    <h1 class="brand-text">BeSpoke Integrated</h1>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="index.html#services" class="nav-link">Services</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="news.html" class="nav-link" style="color: var(--primary-color); font-weight:600;">News</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="news-hero">
+        <div class="container">
+            <h1>News &amp; Updates</h1>
+            <p>Latest insights, projects and announcements from BeSpoke Integrated</p>
+        </div>
+    </section>
+
+    <!-- Posts -->
+    <section class="news-section">
+        <div class="container">
+            <div id="newsGrid" class="news-loading">
+                <i class="fas fa-circle-notch fa-spin" style="font-size:2rem; margin-bottom:1rem; display:block; color: var(--primary-color);"></i>
+                Loading posts…
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">BeSpoke Integrated Sdn Bhd</h3>
+                    <p class="footer-description">Your trusted IT solutions partner in Kuala Lumpur</p>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-subtitle">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#home">Home</a></li>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="news.html">News</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-subtitle">Contact Info</h4>
+                    <div class="footer-contact">
+                        <p><i class="fas fa-map-marker-alt"></i> No 6A, Jalan 4/12B, Seksyen 4 Tambahan, Bandar Baru Bangi, 43650 Selangor</p>
+                        <p><i class="fas fa-phone"></i> 017-2388058</p>
+                        <p><i class="fas fa-envelope"></i> hello@bespokesb.com</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 - <script>document.write(new Date().getFullYear());</script> BeSpoke Integrated Sdn Bhd. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Post Modal -->
+    <div class="post-modal-overlay" id="postModal">
+        <div class="post-modal">
+            <button class="post-modal-close" id="modalClose"><i class="fas fa-times"></i></button>
+            <div class="post-modal-meta" id="modalMeta"></div>
+            <h2 class="post-modal-title" id="modalTitle"></h2>
+            <div class="post-modal-content" id="modalContent"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        const grid = document.getElementById('newsGrid');
+        const modal = document.getElementById('postModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalMeta = document.getElementById('modalMeta');
+        const modalContent = document.getElementById('modalContent');
+
+        document.getElementById('modalClose').addEventListener('click', closeModal);
+        modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+        function closeModal() { modal.classList.remove('active'); }
+
+        function formatDate(iso) {
+            return new Date(iso).toLocaleDateString('en-MY', { year: 'numeric', month: 'long', day: 'numeric' });
+        }
+
+        function excerpt(text, max = 160) {
+            const plain = text.replace(/[#*_`>\-]/g, '').trim();
+            return plain.length > max ? plain.slice(0, max).trim() + '…' : plain;
+        }
+
+        function openPost(post) {
+            modalMeta.innerHTML = `
+                <span class="news-category">${post.category || 'News'}</span>
+                <span style="color:var(--text-light);font-size:.85rem;">${formatDate(post.date)}</span>
+            `;
+            modalTitle.textContent = post.title;
+            modalContent.textContent = post.content;
+            modal.classList.add('active');
+        }
+
+        function renderPosts(posts) {
+            const published = posts.filter(p => p.status !== 'draft');
+            if (published.length === 0) {
+                grid.className = 'news-empty';
+                grid.innerHTML = '<i class="fas fa-newspaper"></i><p>No posts published yet. Check back soon!</p>';
+                return;
+            }
+            const sorted = [...published].sort((a, b) => new Date(b.date) - new Date(a.date));
+            grid.className = 'news-grid';
+            grid.innerHTML = sorted.map(post => `
+                <article class="news-card" onclick='openPost(${JSON.stringify(post)})'>
+                    <div class="news-card-body">
+                        <div class="news-meta">
+                            <span class="news-category">${post.category || 'News'}</span>
+                            <span>${formatDate(post.date)}</span>
+                        </div>
+                        <h2 class="news-title">${post.title}</h2>
+                        <p class="news-excerpt">${excerpt(post.content)}</p>
+                        <span class="news-read-more">Read more <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        async function loadPosts() {
+            if (location.protocol === 'file:') {
+                grid.className = 'news-empty';
+                grid.innerHTML = '<i class="fas fa-newspaper"></i><p>Open this page from the live GitHub Pages site to view posts.<br><small style="opacity:.6;">Fetch does not work on file:// — push to GitHub first.</small></p>';
+                return;
+            }
+            try {
+                const res = await fetch('data/posts.json');
+                if (!res.ok) throw new Error('not found');
+                const data = await res.json();
+                renderPosts(data.posts || []);
+            } catch {
+                grid.className = 'news-empty';
+                grid.innerHTML = '<i class="fas fa-newspaper"></i><p>No posts published yet. Check back soon!</p>';
+            }
+        }
+
+        loadPosts();
+    </script>
+</body>
+</html>

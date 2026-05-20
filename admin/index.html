@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeSpoke CMS - Admin Login</title>
+    <meta name="description" content="BeSpoke Integrated CMS Admin Panel">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--color-primary-light) 0%, #f0f0f0 100%);
+        }
+
+        .login-container {
+            background-color: #ffffff;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-lg);
+            padding: var(--spacing-2xl);
+            max-width: 400px;
+            width: 90%;
+            animation: slideInUp 0.4s ease;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .login-icon {
+            font-size: 48px;
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .login-title {
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .login-subtitle {
+            color: var(--color-text-muted);
+            font-size: var(--font-size-sm);
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-lg);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+        }
+
+        .form-label {
+            font-weight: 600;
+            font-size: var(--font-size-sm);
+        }
+
+        .password-input-group {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .password-input-group input {
+            flex: 1;
+        }
+
+        .password-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--color-primary);
+            font-size: var(--font-size-base);
+            padding: var(--spacing-sm);
+        }
+
+        .password-strength {
+            font-size: var(--font-size-sm);
+        }
+
+        .strength-bar {
+            width: 100%;
+            height: 4px;
+            background-color: var(--color-border);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: var(--spacing-xs);
+        }
+
+        .strength-fill {
+            height: 100%;
+            transition: width 0.3s ease, background-color 0.3s ease;
+            width: 0%;
+        }
+
+        .strength-fill.weak { width: 25%; background-color: var(--color-error); }
+        .strength-fill.fair { width: 50%; background-color: var(--color-warning); }
+        .strength-fill.good { width: 75%; background-color: #17a2b8; }
+        .strength-fill.strong { width: 100%; background-color: var(--color-success); }
+
+        .password-feedback {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-muted);
+        }
+
+        .password-feedback li {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            margin: 0;
+            cursor: pointer;
+            font-size: var(--font-size-sm);
+        }
+
+        .login-button {
+            padding: var(--spacing-md) var(--spacing-lg);
+            font-size: var(--font-size-base);
+            font-weight: 600;
+            border: none;
+            border-radius: var(--border-radius);
+            background-color: var(--color-primary);
+            color: #ffffff;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-sm);
+        }
+
+        .login-button:hover:not(:disabled) {
+            background-color: var(--color-primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .login-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .login-footer {
+            text-align: center;
+            font-size: var(--font-size-sm);
+            color: var(--color-text-muted);
+            margin-top: var(--spacing-xl);
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid var(--color-border);
+        }
+
+        .login-footer a {
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+
+        .login-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            display: none;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .error-message.show {
+            display: block;
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .loader-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loader-overlay.active {
+            display: flex;
+        }
+
+        .loader-content {
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #ffffff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: var(--spacing-md);
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <div class="login-icon">
+                <i class="fas fa-lock"></i>
+            </div>
+            <h1 class="login-title">BeSpoke CMS</h1>
+            <p class="login-subtitle">Admin Panel Login</p>
+        </div>
+
+        <div class="error-message" id="errorMessage"></div>
+
+        <form class="login-form" id="loginForm">
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <div class="password-input-group">
+                    <input
+                        type="password"
+                        id="password"
+                        class="form-control"
+                        placeholder="Enter admin password"
+                        autocomplete="off"
+                        required
+                    >
+                    <button type="button" class="password-toggle" id="passwordToggle">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+
+                <div class="password-strength">
+                    <div class="strength-bar">
+                        <div class="strength-fill" id="strengthFill"></div>
+                    </div>
+                    <small id="strengthText" style="color: var(--color-text-muted); display: block; margin-top: 4px;">Password strength</small>
+                </div>
+
+                <ul class="password-feedback" id="passwordFeedback" style="list-style: none; padding: 0;"></ul>
+            </div>
+
+            <div class="form-group">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="rememberMe" name="rememberMe">
+                    <label for="rememberMe">Remember me</label>
+                </div>
+            </div>
+
+            <button type="submit" class="login-button" id="loginButton">
+                <i class="fas fa-sign-in-alt"></i>
+                <span>Login</span>
+            </button>
+        </form>
+
+        <div class="login-footer">
+            <p>Encrypted admin panel for BeSpoke Integrated</p>
+            <p style="margin-top: var(--spacing-sm); font-size: 12px; color: var(--color-text-muted);">
+                <i class="fas fa-lock"></i> Data is encrypted with AES-256
+            </p>
+        </div>
+    </div>
+
+    <div class="loader-overlay" id="loader">
+        <div class="loader-content">
+            <div class="spinner"></div>
+            <p>Authenticating...</p>
+        </div>
+    </div>
+
+    <!-- Load CMS modules (no external libraries needed - uses Web Crypto API) -->
+    <script src="../assets/js/encryption.js"></script>
+    <script src="../assets/js/data-manager.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/admin-auth.js"></script>
+
+    <!-- Login page script -->
+    <script src="js/login.js"></script>
+</body>
+</html>

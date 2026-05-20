@@ -1,0 +1,13 @@
+{
+  "posts": [
+    {
+      "id": "blog-1779280986562",
+      "title": "test",
+      "content": "test 123",
+      "date": "2026-05-20T04:43:00.000Z",
+      "category": "Updates",
+      "status": "published"
+    }
+  ],
+  "lastUpdated": "2026-05-20T12:43:31.895Z"
+}

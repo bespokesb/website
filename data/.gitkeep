@@ -1,0 +1,3 @@
+# This directory contains encrypted content files
+# - content.enc: Main encrypted content file (created via setup wizard)
+# - sample-content.json: Sample template data

@@ -1,0 +1,103 @@
+{
+  "version": "1.0",
+  "company": {
+    "name": "BeSpoke Integrated Sdn Bhd",
+    "aboutText": "We are a leading IT solutions provider based in Kuala Lumpur, Malaysia, dedicated to helping businesses transform through innovative technology solutions. With years of experience and a team of skilled professionals, we deliver excellence in every project we undertake.",
+    "address": "No 6A, Jalan 4/12B, Seksyen 4 Tambahan, Bandar Baru Bangi, 43650 Selangor",
+    "phone": "017-2388058",
+    "email": "hello@bespokesb.com",
+    "whatsapp": "601722388058",
+    "googleMapsEmbed": "",
+    "socialMedia": {
+      "facebook": "",
+      "linkedin": "",
+      "twitter": "",
+      "instagram": ""
+    }
+  },
+  "blogs": [
+    {
+      "id": "blog-1234567890",
+      "title": "Welcome to BeSpoke CMS",
+      "slug": "welcome-to-bespoke-cms",
+      "content": "# Welcome to BeSpoke CMS\n\nThis is a sample blog post to demonstrate the CMS functionality. You can edit or delete this post from the admin dashboard.\n\n## Features\n- Markdown support\n- Category tagging\n- Draft and publish status\n- Encrypted storage",
+      "coverImage": "https://via.placeholder.com/800x400?text=Blog+Cover",
+      "excerpt": "Welcome to BeSpoke CMS - Your encrypted content management system",
+      "date": "2024-05-20T10:30:00Z",
+      "category": "Updates",
+      "status": "published",
+      "author": "Admin",
+      "tags": ["welcome", "cms"],
+      "featured": true,
+      "createdAt": "2024-05-20T10:30:00Z",
+      "updatedAt": "2024-05-20T10:30:00Z"
+    }
+  ],
+  "clients": [
+    {
+      "id": "client-1234567890",
+      "name": "Tech Company Inc",
+      "logo": "https://via.placeholder.com/200x100?text=Client+Logo",
+      "website": "https://techcompany.com",
+      "description": "A leading technology company providing innovative solutions.",
+      "industry": "Technology",
+      "featured": true
+    },
+    {
+      "id": "client-1234567891",
+      "name": "E-Commerce Solutions",
+      "logo": "https://via.placeholder.com/200x100?text=E-Commerce",
+      "website": "https://ecommerce.com",
+      "description": "Provider of complete e-commerce platforms.",
+      "industry": "E-Commerce",
+      "featured": true
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "testimonial-1234567890",
+      "clientName": "John Doe",
+      "position": "CEO",
+      "company": "Tech Startup",
+      "feedback": "BeSpoke Integrated provided outstanding service and support. Their team is professional and delivers quality work consistently.",
+      "rating": 5,
+      "image": "https://via.placeholder.com/100?text=Avatar",
+      "featured": true,
+      "date": "2024-05-20T10:30:00Z"
+    },
+    {
+      "id": "testimonial-1234567891",
+      "clientName": "Jane Smith",
+      "position": "CTO",
+      "company": "Digital Agency",
+      "feedback": "Great collaboration and excellent technical expertise. Highly recommended for any IT projects.",
+      "rating": 5,
+      "image": "https://via.placeholder.com/100?text=Avatar2",
+      "featured": true,
+      "date": "2024-05-19T14:20:00Z"
+    }
+  ],
+  "gallery": [
+    {
+      "id": "gallery-1234567890",
+      "title": "Office Environment",
+      "image": "https://via.placeholder.com/800x600?text=Office",
+      "thumbnail": "https://via.placeholder.com/200x150?text=Office",
+      "category": "Office",
+      "description": "Our modern office space in Bandar Baru Bangi",
+      "order": 1,
+      "featured": true
+    },
+    {
+      "id": "gallery-1234567891",
+      "title": "Team Meeting",
+      "image": "https://via.placeholder.com/800x600?text=Team",
+      "thumbnail": "https://via.placeholder.com/200x150?text=Team",
+      "category": "Team",
+      "description": "Our talented team collaborating on projects",
+      "order": 2,
+      "featured": false
+    }
+  ],
+  "lastUpdated": "2024-05-20T10:30:00Z"
+}

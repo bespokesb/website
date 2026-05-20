@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeSpoke CMS - Setup Helper</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0066cc 0%, #e6f0ff 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+        }
+
+        h1 {
+            color: #0066cc;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .steps {
+            background: #f5f5f5;
+            border-left: 4px solid #0066cc;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+        }
+
+        .steps h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .steps ol {
+            margin-left: 20px;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .steps li {
+            margin-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        input[type="password"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #0066cc;
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+        }
+
+        .button-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #0066cc;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0052a3;
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+
+        .btn-secondary:hover {
+            background: #e6e6e6;
+        }
+
+        .output-area {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .output-area.active {
+            display: block;
+        }
+
+        .output-area h4 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .output-text {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 12px;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+            word-break: break-all;
+            color: #333;
+        }
+
+        .copy-btn {
+            margin-top: 10px;
+            width: 100%;
+            padding: 10px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .copy-btn:hover {
+            background: #218838;
+        }
+
+        .message {
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .message.active {
+            display: block;
+        }
+
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .instructions {
+            background: #fff3cd;
+            border: 1px solid #ffeeba;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 20px;
+            color: #856404;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 BeSpoke CMS Setup</h1>
+        <p class="subtitle">Generate encrypted content file</p>
+
+        <div class="steps">
+            <h3>How It Works</h3>
+            <ol>
+                <li>Set a secure admin password</li>
+                <li>Click "Encrypt Sample Data" to generate encrypted content</li>
+                <li>Copy the encrypted output</li>
+                <li>Create file at <code>/data/content.enc</code> and paste the content</li>
+                <li>Login with your password at <code>/admin/index.html</code></li>
+            </ol>
+        </div>
+
+        <div id="message" class="message"></div>
+
+        <form id="setupForm">
+            <div class="form-group">
+                <label for="password">Admin Password *</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    placeholder="Enter a secure password"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password *</label>
+                <input 
+                    type="password" 
+                    id="confirmPassword" 
+                    placeholder="Confirm your password"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="dataSource">Data Source</label>
+                <select id="dataSource">
+                    <option value="sample">Sample Data (from sample-content.json)</option>
+                    <option value="empty">Empty Schema (start fresh)</option>
+                </select>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="btn-primary">
+                    <i>🔒</i> Encrypt & Generate
+                </button>
+                <button type="reset" class="btn-secondary">Clear</button>
+            </div>
+        </form>
+
+        <div id="outputArea" class="output-area">
+            <h4>Encrypted Content (Copy this to /data/content.enc)</h4>
+            <div class="output-text" id="outputText"></div>
+            <button class="copy-btn" id="copyBtn">📋 Copy to Clipboard</button>
+        </div>
+
+        <div class="instructions">
+            <strong>📌 Next Steps:</strong><br>
+            1. Copy the encrypted content above<br>
+            2. Create a file at <code>/data/content.enc</code> in your repository<br>
+            3. Paste the encrypted content into the file<br>
+            4. Commit and push to GitHub<br>
+            5. Visit <code>/admin/index.html</code> and login with your password<br><br>
+            <strong>Note:</strong> Keep your password secure. There's no password recovery option.
+        </div>
+    </div>
+
+    <!-- Load CMS modules (no external libraries needed - uses Web Crypto API) -->
+    <script src="../assets/js/encryption.js"></script>
+
+    <script>
+        const form = document.getElementById('setupForm');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        const dataSourceSelect = document.getElementById('dataSource');
+        const outputArea = document.getElementById('outputArea');
+        const outputText = document.getElementById('outputText');
+        const copyBtn = document.getElementById('copyBtn');
+        const messageEl = document.getElementById('message');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            clearMessage();
+
+            const password = passwordInput.value;
+            const confirmPassword = confirmPasswordInput.value;
+            const dataSource = dataSourceSelect.value;
+
+            // Validate passwords match
+            if (password !== confirmPassword) {
+                showMessage('Passwords do not match', 'error');
+                return;
+            }
+
+            // Validate password strength
+            if (password.length < 8) {
+                showMessage('Password must be at least 8 characters', 'error');
+                return;
+            }
+
+            try {
+                // Load data
+                let data;
+                // Inline sample data — fetch() fails over file:// protocol
+                const SAMPLE_DATA = {"version":"1.0","company":{"name":"BeSpoke Integrated Sdn Bhd","aboutText":"We are a leading IT solutions provider based in Kuala Lumpur, Malaysia, dedicated to helping businesses transform through innovative technology solutions. With years of experience and a team of skilled professionals, we deliver excellence in every project we undertake.","address":"No 6A, Jalan 4/12B, Seksyen 4 Tambahan, Bandar Baru Bangi, 43650 Selangor","phone":"017-2388058","email":"hello@bespokesb.com","whatsapp":"601722388058","googleMapsEmbed":"","socialMedia":{"facebook":"","linkedin":"","twitter":"","instagram":""}},"blogs":[{"id":"blog-1234567890","title":"Welcome to BeSpoke CMS","slug":"welcome-to-bespoke-cms","content":"# Welcome to BeSpoke CMS\n\nThis is a sample blog post to demonstrate the CMS functionality. You can edit or delete this post from the admin dashboard.\n\n## Features\n- Markdown support\n- Category tagging\n- Draft and publish status\n- Encrypted storage","coverImage":"https://via.placeholder.com/800x400?text=Blog+Cover","excerpt":"Welcome to BeSpoke CMS - Your encrypted content management system","date":"2024-05-20T10:30:00Z","category":"Updates","status":"published","author":"Admin","tags":["welcome","cms"],"featured":true,"createdAt":"2024-05-20T10:30:00Z","updatedAt":"2024-05-20T10:30:00Z"}],"clients":[{"id":"client-1234567890","name":"Tech Company Inc","logo":"https://via.placeholder.com/200x100?text=Client+Logo","website":"https://techcompany.com","description":"A leading technology company providing innovative solutions.","industry":"Technology","featured":true},{"id":"client-1234567891","name":"E-Commerce Solutions","logo":"https://via.placeholder.com/200x100?text=E-Commerce","website":"https://ecommerce.com","description":"Provider of complete e-commerce platforms.","industry":"E-Commerce","featured":true}],"testimonials":[{"id":"testimonial-1234567890","clientName":"John Doe","position":"CEO","company":"Tech Startup","feedback":"BeSpoke Integrated provided outstanding service and support. Their team is professional and delivers quality work consistently.","rating":5,"image":"https://via.placeholder.com/100?text=Avatar","featured":true,"date":"2024-05-20T10:30:00Z"},{"id":"testimonial-1234567891","clientName":"Jane Smith","position":"CTO","company":"Digital Agency","feedback":"Great collaboration and excellent technical expertise. Highly recommended for any IT projects.","rating":5,"image":"https://via.placeholder.com/100?text=Avatar2","featured":true,"date":"2024-05-19T14:20:00Z"}],"gallery":[{"id":"gallery-1234567890","title":"Office Environment","image":"https://via.placeholder.com/800x600?text=Office","thumbnail":"https://via.placeholder.com/200x150?text=Office","category":"Office","description":"Our modern office space in Bandar Baru Bangi","order":1,"featured":true},{"id":"gallery-1234567891","title":"Team Meeting","image":"https://via.placeholder.com/800x600?text=Team","thumbnail":"https://via.placeholder.com/200x150?text=Team","category":"Team","description":"Our talented team collaborating on projects","order":2,"featured":false}],"lastUpdated":"2024-05-20T10:30:00Z"};
+
+                if (dataSource === 'sample') {
+                    data = SAMPLE_DATA;
+                    showMessage('✓ Sample data loaded successfully', 'info');
+                } else {
+                    // Empty schema
+                    data = {
+                        version: "1.0",
+                        company: {
+                            name: "Your Company",
+                            aboutText: "",
+                            address: "",
+                            phone: "",
+                            email: "",
+                            whatsapp: "",
+                            googleMapsEmbed: "",
+                            socialMedia: {}
+                        },
+                        blogs: [],
+                        clients: [],
+                        testimonials: [],
+                        gallery: [],
+                        lastUpdated: new Date().toISOString()
+                    };
+                    showMessage('✓ Empty schema created', 'info');
+                }
+
+                // Encrypt
+                const encrypted = await Encryption.encrypt(data, password);
+                outputText.textContent = encrypted;
+                outputArea.classList.add('active');
+
+                // Store password hash so login can validate even on file://
+                const _hashBuf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(password));
+                const _hashHex = Array.from(new Uint8Array(_hashBuf)).map(b => b.toString(16).padStart(2,'0')).join('');
+                localStorage.setItem('cms-password-hash', _hashHex);
+
+                showMessage('✓ Encryption successful! Copy the output below.', 'success');
+            } catch (error) {
+                console.error('Error:', error);
+                showMessage('❌ Error: ' + error.message, 'error');
+            }
+        });
+
+        copyBtn.addEventListener('click', async () => {
+            const text = outputText.textContent;
+            try {
+                await navigator.clipboard.writeText(text);
+                showMessage('✓ Copied to clipboard!', 'success');
+            } catch (error) {
+                showMessage('Failed to copy. Please try again.', 'error');
+            }
+        });
+
+        function showMessage(text, type) {
+            messageEl.textContent = text;
+            messageEl.className = `message active ${type}`;
+        }
+
+        function clearMessage() {
+            messageEl.className = 'message';
+            messageEl.textContent = '';
+        }
+    </script>
+</body>
+</html>
