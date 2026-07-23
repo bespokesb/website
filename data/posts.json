@@ -1,13 +1,15 @@
 {
   "posts": [
     {
-      "id": "blog-1779280986562",
-      "title": "test",
-      "content": "test 123",
-      "date": "2026-05-20T04:43:00.000Z",
-      "category": "Updates",
+      "id": "post-zakatanda-2026",
+      "title": "Kemaskini Sistem ZakatAnda",
+      "content": "Kami telah mengemaskini sistem ZakatAnda dengan menambah sistem analitik Ads dan penilaian pembayar zakat serta membaiki kestabilan server untuk menampung pengguna melebihi hit 9.7k sesaat waktu puncak.\n\nPembaharuan ini memastikan kecekapan pengurusan data, pemprosesan transaksi yang pantas, dan kestabilan optimum semasa trafik tinggi.\n\nSila layari portal rasmi: https://zakatanda.com.my",
+      "image": "assets/img/zakatanda.png",
+      "url": "https://zakatanda.com.my",
+      "date": "2026-07-23T14:45:00.000Z",
+      "category": "Kemaskini",
       "status": "published"
     }
   ],
-  "lastUpdated": "2026-05-20T12:43:31.895Z"
+  "lastUpdated": "2026-07-23T14:45:00.000Z"
 }
