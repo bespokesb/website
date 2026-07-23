@@ -6,139 +6,256 @@
     <title>News & Updates - BeSpoke Integrated Sdn Bhd</title>
     <meta name="description" content="Latest news, updates and insights from BeSpoke Integrated Sdn Bhd">
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         .news-hero {
-            padding: 8rem 0 4rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 9rem 0 4rem;
             text-align: center;
-            color: white;
+            position: relative;
         }
-        .news-hero h1 { font-size: 3rem; font-weight: 700; margin-bottom: 1rem; }
-        .news-hero p  { font-size: 1.2rem; opacity: 0.9; }
 
-        .news-section { padding: 4rem 0 6rem; background: var(--bg-light); }
+        .news-section {
+            padding: 2rem 0 6rem;
+        }
 
         .news-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
             gap: 2rem;
-            margin-top: 2.5rem;
+            margin-top: 2rem;
         }
 
         .news-card {
-            background: var(--bg-white);
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            overflow: hidden;
+            padding: 0;
             display: flex;
             flex-direction: column;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
         }
-        .news-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
 
-        .news-card-body { padding: 1.75rem; flex: 1; display: flex; flex-direction: column; }
+        .news-card-body {
+            padding: 2rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
 
         .news-meta {
-            display: flex; align-items: center; gap: 1rem;
-            margin-bottom: 0.75rem; font-size: 0.8rem; color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
         }
+
         .news-category {
-            background: #ede9fe; color: #7c3aed;
-            padding: 0.2rem 0.65rem; border-radius: 50px;
-            font-weight: 600; font-size: 0.75rem;
+            background: rgba(56, 189, 248, 0.12);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-full);
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 0.03em;
         }
-        .news-title  { font-size: 1.2rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.75rem; line-height: 1.4; }
-        .news-excerpt { color: var(--text-light); font-size: 0.95rem; line-height: 1.6; flex: 1; }
+
+        .news-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .news-excerpt {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            flex: 1;
+        }
+
         .news-read-more {
-            margin-top: 1.25rem; color: var(--primary-color);
-            font-weight: 600; font-size: 0.9rem;
-            display: inline-flex; align-items: center; gap: 0.4rem;
+            margin-top: 1.5rem;
+            color: #38bdf8;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap var(--transition-fast);
         }
 
-        /* Modal */
+        .news-card:hover .news-read-more {
+            gap: 0.8rem;
+            color: #818cf8;
+        }
+
+        /* Glass Modal Overlay */
         .post-modal-overlay {
-            display: none; position: fixed; inset: 0;
-            background: rgba(0,0,0,0.6); z-index: 2000;
-            align-items: center; justify-content: center; padding: 1rem;
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(7, 10, 18, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            opacity: 0;
+            transition: opacity var(--transition-normal);
         }
-        .post-modal-overlay.active { display: flex; }
-        .post-modal {
-            background: white; border-radius: 16px;
-            max-width: 760px; width: 100%; max-height: 85vh;
-            overflow-y: auto; padding: 2.5rem; position: relative;
-        }
-        .post-modal-close {
-            position: absolute; top: 1.25rem; right: 1.25rem;
-            background: var(--bg-light); border: none;
-            width: 36px; height: 36px; border-radius: 50%;
-            font-size: 1rem; cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-            color: var(--text-light);
-        }
-        .post-modal-close:hover { background: var(--border-color); }
-        .post-modal-meta { display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; }
-        .post-modal-title { font-size: 1.75rem; font-weight: 700; color: var(--text-dark); margin-bottom: 1rem; line-height: 1.3; }
-        .post-modal-content { color: var(--text-dark); line-height: 1.8; font-size: 1rem; white-space: pre-wrap; }
 
-        .news-empty, .news-loading { text-align: center; padding: 4rem 0; color: var(--text-light); }
-        .news-empty i, .news-loading i { font-size: 3rem; margin-bottom: 1rem; display: block; opacity: 0.4; }
+        .post-modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .post-modal {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(24px) saturate(200%);
+            -webkit-backdrop-filter: blur(24px) saturate(200%);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--glass-shadow-lg);
+            max-width: 780px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 2.5rem;
+            position: relative;
+            transform: scale(0.95);
+            transition: transform var(--transition-normal);
+        }
+
+        .post-modal-overlay.active .post-modal {
+            transform: scale(1);
+        }
+
+        .post-modal-close {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.25rem;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            transition: all var(--transition-fast);
+        }
+
+        .post-modal-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .post-modal-meta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        .post-modal-title {
+            font-size: clamp(1.5rem, 3vw, 2.25rem);
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+
+        .post-modal-content {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-size: 1.05rem;
+            white-space: pre-wrap;
+        }
+
+        .news-empty, .news-loading {
+            text-align: center;
+            padding: 5rem 0;
+            color: var(--text-muted);
+        }
+
+        .news-empty i, .news-loading i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+            opacity: 0.6;
+        }
 
         @media (max-width: 768px) {
-            .news-hero h1 { font-size: 2rem; }
             .news-grid { grid-template-columns: 1fr; }
-            .post-modal { padding: 1.5rem; }
-            .post-modal-title { font-size: 1.3rem; }
+            .post-modal { padding: 1.75rem; }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
+    <!-- Ambient Glowing Background Mesh -->
+    <div class="ambient-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Header Navigation -->
     <header class="header">
-        <nav class="nav container">
-            <div class="nav-brand">
-                <a href="index.html" style="text-decoration:none;">
-                    <h1 class="brand-text">BeSpoke Integrated</h1>
+        <div class="container">
+            <nav class="nav-container">
+                <a href="index.html" class="nav-brand">
+                    <div class="brand-logo-icon">
+                        <i class="fas fa-cubes"></i>
+                    </div>
+                    <span class="brand-text">BeSpoke Integrated</span>
                 </a>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="index.html#home"     class="nav-link" data-en="Home"     data-bm="Laman Utama">Home</a></li>
-                <li><a href="index.html#services"  class="nav-link" data-en="Services" data-bm="Perkhidmatan">Services</a></li>
-                <li><a href="index.html#about"     class="nav-link" data-en="About"    data-bm="Tentang">About</a></li>
-                <li><a href="news.html"            class="nav-link" data-en="News"     data-bm="Berita" style="color:var(--primary-color);font-weight:600;">News</a></li>
-                <li><a href="index.html#contact"   class="nav-link" data-en="Contact"  data-bm="Hubungi">Contact</a></li>
-            </ul>
-            <div class="language-toggle">
-                <button class="lang-btn active" data-lang="en">EN</button>
-                <button class="lang-btn" data-lang="bm">BM</button>
-            </div>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html#home" class="nav-link" data-en="Home" data-bm="Laman Utama">Home</a></li>
+                    <li><a href="index.html#services" class="nav-link" data-en="Services" data-bm="Perkhidmatan">Services</a></li>
+                    <li><a href="index.html#about" class="nav-link" data-en="About" data-bm="Tentang">About</a></li>
+                    <li><a href="news.html" class="nav-link active" data-en="News" data-bm="Berita">News</a></li>
+                    <li><a href="index.html#contact" class="nav-link" data-en="Contact" data-bm="Hubungi">Contact</a></li>
+                </ul>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <div class="language-toggle">
+                        <button class="lang-btn active" data-lang="en">EN</button>
+                        <button class="lang-btn" data-lang="bm">BM</button>
+                    </div>
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </nav>
+        </div>
     </header>
 
-    <!-- Hero -->
+    <!-- News Hero -->
     <section class="news-hero">
         <div class="container">
-            <h1 data-en="News &amp; Updates" data-bm="Berita &amp; Kemas Kini">News &amp; Updates</h1>
-            <p data-en="Latest insights, projects and announcements from BeSpoke Integrated"
-               data-bm="Wawasan terkini, projek dan pengumuman dari BeSpoke Integrated">
-                Latest insights, projects and announcements from BeSpoke Integrated
-            </p>
+            <div class="section-header">
+                <span class="section-tag" data-en="Announcements" data-bm="Pengumuman">Announcements</span>
+                <h1 class="section-title" data-en="News & Insights" data-bm="Berita & Wawasan">News & Insights</h1>
+                <p class="section-subtitle" data-en="Latest announcements, technological insights, and company milestones from BeSpoke Integrated" data-bm="Pengumuman terkini, wawasan teknologi, dan pencapaian syarikat daripada BeSpoke Integrated">
+                    Latest announcements, technological insights, and company milestones from BeSpoke Integrated
+                </p>
+            </div>
         </div>
     </section>
 
-    <!-- Posts -->
+    <!-- Posts Section -->
     <section class="news-section">
         <div class="container">
             <div id="newsGrid" class="news-loading">
-                <i class="fas fa-circle-notch fa-spin" style="font-size:2rem;margin-bottom:1rem;display:block;color:var(--primary-color);opacity:1;"></i>
-                <span data-en="Loading posts…" data-bm="Memuatkan catatan…">Loading posts…</span>
+                <i class="fas fa-circle-notch fa-spin" style="font-size:2.5rem;margin-bottom:1rem;display:block;color:#38bdf8;"></i>
+                <span data-en="Loading latest articles…" data-bm="Memuatkan artikel terkini…">Loading latest articles…</span>
             </div>
         </div>
     </section>
@@ -148,39 +265,45 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3 class="footer-title">BeSpoke Integrated Sdn Bhd</h3>
-                    <p class="footer-description"
-                       data-en="Your trusted IT solutions partner in Kuala Lumpur"
-                       data-bm="Rakan penyelesaian IT dipercayai anda di Kuala Lumpur">
+                    <h3 class="footer-brand-title">BeSpoke Integrated Sdn Bhd</h3>
+                    <p class="footer-reg-number">202401016205 (1562055-H)</p>
+                    <p class="footer-description" data-en="Your trusted IT solutions partner in Kuala Lumpur" data-bm="Rakan penyelesaian IT dipercayai anda di Kuala Lumpur">
                         Your trusted IT solutions partner in Kuala Lumpur
                     </p>
                 </div>
                 <div class="footer-section">
-                    <h4 class="footer-subtitle" data-en="Quick Links" data-bm="Pautan Pantas">Quick Links</h4>
+                    <h4 class="footer-column-title" data-en="Quick Links" data-bm="Pautan Pantas">Quick Links</h4>
                     <ul class="footer-links">
-                        <li><a href="index.html#home"     data-en="Home"     data-bm="Laman Utama">Home</a></li>
-                        <li><a href="index.html#services"  data-en="Services" data-bm="Perkhidmatan">Services</a></li>
-                        <li><a href="index.html#about"    data-en="About"    data-bm="Tentang">About</a></li>
-                        <li><a href="news.html"           data-en="News"     data-bm="Berita">News</a></li>
-                        <li><a href="index.html#contact"  data-en="Contact"  data-bm="Hubungi">Contact</a></li>
+                        <li><a href="index.html#home" data-en="Home" data-bm="Laman Utama">Home</a></li>
+                        <li><a href="index.html#services" data-en="Services" data-bm="Perkhidmatan">Services</a></li>
+                        <li><a href="index.html#about" data-en="About" data-bm="Tentang">About</a></li>
+                        <li><a href="news.html" data-en="News" data-bm="Berita">News</a></li>
+                        <li><a href="index.html#contact" data-en="Contact" data-bm="Hubungi">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4 class="footer-subtitle" data-en="Contact Info" data-bm="Maklumat Hubungan">Contact Info</h4>
-                    <div class="footer-contact">
-                        <p><i class="fas fa-map-marker-alt"></i> No 6A, Jalan 4/12B, Seksyen 4 Tambahan, Bandar Baru Bangi, 43650 Selangor</p>
-                        <p><i class="fas fa-phone"></i> 017-2388058</p>
-                        <p><i class="fas fa-envelope"></i> hello@bespokesb.com</p>
+                    <h4 class="footer-column-title" data-en="Contact Info" data-bm="Maklumat Hubungan">Contact Info</h4>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>No 6A, Jalan 4/12B, Seksyen 4 Tambahan, Bandar Baru Bangi, 43650 Selangor</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>017-2388058</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>hello@bespokesb.com</span>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 - <script>document.write(new Date().getFullYear());</script> BeSpoke Integrated Sdn Bhd. <span data-en="All rights reserved." data-bm="Hak cipta terpelihara.">All rights reserved.</span></p>
+                <p>&copy; 2024 - <script>document.write(new Date().getFullYear());</script> BeSpoke Integrated Sdn Bhd. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Post Modal -->
+    <!-- Post Modal Overlay -->
     <div class="post-modal-overlay" id="postModal">
         <div class="post-modal">
             <button class="post-modal-close" id="modalClose"><i class="fas fa-times"></i></button>
@@ -198,17 +321,16 @@
         const modalMeta    = document.getElementById('modalMeta');
         const modalContent = document.getElementById('modalContent');
 
-        // UI string translations
         const t = {
             en: {
-                readMore:  'Read more',
-                empty:     'No posts published yet. Check back soon!',
-                fileProto: 'Open this page from the live site to view posts.',
+                readMore:  'Read Article',
+                empty:     'No articles published yet. Check back soon!',
+                fileProto: 'Open this page via web server to fetch published news.',
             },
             bm: {
-                readMore:  'Baca lagi',
-                empty:     'Tiada catatan lagi. Semak semula tidak lama lagi!',
-                fileProto: 'Buka laman ini dari laman langsung untuk melihat catatan.',
+                readMore:  'Baca Artikel',
+                empty:     'Tiada artikel diterbitkan lagi. Semak semula tidak lama lagi!',
+                fileProto: 'Buka laman ini melalui pelayan web untuk mengambil berita.',
             }
         };
 
@@ -230,16 +352,22 @@
         function openPost(post) {
             modalMeta.innerHTML = `
                 <span class="news-category">${post.category || 'News'}</span>
-                <span style="color:var(--text-light);font-size:.85rem;">${formatDate(post.date)}</span>
+                <span style="color:var(--text-muted);font-size:.85rem;"><i class="far fa-calendar-alt"></i> ${formatDate(post.date)}</span>
             `;
             modalTitle.textContent   = post.title;
             modalContent.textContent = post.content;
             modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
 
-        document.getElementById('modalClose').addEventListener('click', () => modal.classList.remove('active'));
-        modal.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('active'); });
-        document.addEventListener('keydown', e => { if (e.key === 'Escape') modal.classList.remove('active'); });
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('modalClose').addEventListener('click', closeModal);
+        modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
         let cachedPosts = [];
 
@@ -253,11 +381,11 @@
             const sorted = [...published].sort((a, b) => new Date(b.date) - new Date(a.date));
             grid.className = 'news-grid';
             grid.innerHTML = sorted.map(post => `
-                <article class="news-card" onclick='openPost(${JSON.stringify(post).replace(/'/g, "&#39;")})'>
+                <article class="glass-card news-card" onclick='openPost(${JSON.stringify(post).replace(/'/g, "&#39;")})'>
                     <div class="news-card-body">
                         <div class="news-meta">
                             <span class="news-category">${post.category || 'News'}</span>
-                            <span>${formatDate(post.date)}</span>
+                            <span><i class="far fa-calendar-alt"></i> ${formatDate(post.date)}</span>
                         </div>
                         <h2 class="news-title">${post.title}</h2>
                         <p class="news-excerpt">${excerpt(post.content)}</p>
@@ -285,7 +413,6 @@
             }
         }
 
-        // Re-render when language switches so dates & labels update
         document.addEventListener('langchange', () => {
             if (cachedPosts.length) renderPosts(cachedPosts);
         });

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scheduled Maintenance - BeSpoke Integrated</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: #0b0f19;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #stars-container {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background-color: #fff;
+            border-radius: 50%;
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .maintenance-wrapper {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 620px;
+            padding: 1.5rem;
+        }
+
+        .maintenance-glass-panel {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(24px) saturate(200%);
+            -webkit-backdrop-filter: blur(24px) saturate(200%);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-xl);
+            padding: 3.5rem 2.5rem;
+            text-align: center;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .maintenance-icon-pod {
+            width: 80px;
+            height: 80px;
+            border-radius: 24px;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(239, 68, 68, 0.2));
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.25rem;
+            color: #fbbf24;
+            box-shadow: 0 0 30px rgba(245, 158, 11, 0.3);
+            animation: pulse-glow 3s infinite alternate;
+        }
+
+        @keyframes pulse-glow {
+            from { box-shadow: 0 0 20px rgba(245, 158, 11, 0.2); }
+            to { box-shadow: 0 0 45px rgba(245, 158, 11, 0.5); }
+        }
+
+        .status-badge-amber {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1.1rem;
+            border-radius: var(--radius-full);
+            background: rgba(245, 158, 11, 0.12);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            color: #fbbf24;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .maintenance-title {
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff 0%, #fbbf24 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0;
+        }
+
+        .maintenance-desc {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Ambient Background Blobs -->
+    <div class="ambient-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+    
+    <div id="stars-container"></div>
+
+    <div class="maintenance-wrapper">
+        <div class="maintenance-glass-panel">
+            <div class="maintenance-icon-pod">
+                <i class="fas fa-screwdriver-wrench"></i>
+            </div>
+            <div class="status-badge-amber">
+                <i class="fas fa-circle-dot fa-spin"></i>
+                <span data-en="Scheduled Maintenance" data-bm="Penyelenggaraan Terjadual">Scheduled Maintenance</span>
+            </div>
+            <h1 class="maintenance-title" data-en="System Upgrade in Progress" data-bm="Naik Taraf Sistem Sedang Berjalan">System Upgrade in Progress</h1>
+            <p class="maintenance-desc" data-en="We are currently executing planned server optimization and system enhancements to improve your digital experience. We will be back online shortly." data-bm="Kami sedang menjalankan pengoptimuman pelayan dan peningkatan sistem yang dirancang untuk meningkatkan pengalaman digital anda. Kami akan kembali dalam masa terdekat.">
+                We are currently executing planned server optimization and system enhancements to improve your digital experience. We will be back online shortly.
+            </p>
+            <a href="index.html" class="btn btn-secondary" style="margin-top: 1rem;">
+                <i class="fas fa-arrow-left"></i>
+                <span data-en="Return to Home" data-bm="Kembali ke Utama">Return to Home</span>
+            </a>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        const starsContainer = document.getElementById('stars-container');
+        const starCount = 120;
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            const size = Math.random() * 2.5 + 1;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.setProperty('--duration', `${2 + Math.random() * 4}s`);
+            star.style.animationDelay = `${Math.random() * 4}s`;
+            starsContainer.appendChild(star);
+        }
+    </script>
+</body>
+</html>
