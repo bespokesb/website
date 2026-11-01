@@ -259,16 +259,50 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* ── Contact form handling ── */
+    /* ── Contact form handling with Math Anti-Bot Verification ── */
     const contactForm = document.querySelector('.contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', e => {
             e.preventDefault();
+
+            // Random simple math challenge to prevent spam bots
+            const num1 = Math.floor(Math.random() * 9) + 1;
+            const num2 = Math.floor(Math.random() * 9) + 1;
+            const expectedSum = num1 + num2;
+
             const currentLang = localStorage.getItem('bespoke-lang') || 'en';
-            const msg = currentLang === 'bm' 
-                ? 'Terima kasih! Kami akan menghubungi anda tidak lama lagi.' 
-                : 'Thank you! We will get back to you soon.';
-            alert(msg);
+            const promptMsg = currentLang === 'bm'
+                ? `Pengesahan Keselamatan: Sila selesaikan soalan matematik ini untuk mengelakkan bot:\n\nBerapakah ${num1} + ${num2}?`
+                : `Security Verification: Please solve this simple math question to prevent bots:\n\nWhat is ${num1} + ${num2}?`;
+
+            const userAnswer = prompt(promptMsg);
+
+            // User cancelled prompt
+            if (userAnswer === null) {
+                return;
+            }
+
+            // Verify answer
+            if (parseInt(userAnswer.trim(), 10) !== expectedSum) {
+                const errorMsg = currentLang === 'bm'
+                    ? 'Jawapan salah! Mesej tidak dihantar. Sila cuba lagi.'
+                    : 'Incorrect answer! Message not sent. Please try again.';
+                alert(errorMsg);
+                return;
+            }
+
+            // If answer is correct, construct mailto and trigger email client
+            const name = (contactForm.querySelector('[name="name"]')?.value || '').trim();
+            const email = (contactForm.querySelector('[name="email"]')?.value || '').trim();
+            const phone = (contactForm.querySelector('[name="phone"]')?.value || '').trim();
+            const message = (contactForm.querySelector('[name="message"]')?.value || '').trim();
+
+            const subject = `Website Inquiry from ${name}`;
+            const body = `Name: ${name}\nEmail: ${email}\nPhone: ${phone || 'Not provided'}\n\nMessage:\n${message}`;
+
+            const mailtoUrl = `mailto:hello@bespokesb.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+            window.location.href = mailtoUrl;
             contactForm.reset();
         });
     }
